@@ -1,13 +1,15 @@
 import { Button, Grid } from "@mui/material";
 import { Box } from "@mui/system";
 import { Form } from "formik";
-import React from "react";
+import { useContext } from "react";
+import { FormeContext } from "../component/Forme";
 import { InputField } from "../component/InputField";
 
 interface FormBuilderProps {
   config: FormBuilderField[];
   title: string;
   submitButtonText: string;
+  backButtonText?: string;
 }
 
 interface FormBuilderField {
@@ -17,6 +19,11 @@ interface FormBuilderField {
   doubleRow?: boolean;
 }
 export const FormBuilder = (props: FormBuilderProps) => {
+  const formeContext = useContext(FormeContext);
+
+  if (!formeContext) return null;
+  const { activeStep, setActiveStep } = formeContext;
+
   const renderInputs = () => {
     return props.config.map((formBuilderField, index) => {
       if (formBuilderField.type === "text") {
@@ -42,6 +49,10 @@ export const FormBuilder = (props: FormBuilderProps) => {
       } else return <div>Something went wrong</div>;
     });
   };
+
+  const handleBackButtonOnClick = () => {
+    setActiveStep(activeStep - 1);
+  };
   return (
     <Box>
       <Form>
@@ -57,6 +68,17 @@ export const FormBuilder = (props: FormBuilderProps) => {
           </Grid>
           {renderInputs()}
           <Grid item>
+            {props.backButtonText && (
+              <Button
+                fullWidth
+                variant='contained'
+                color='primary'
+                onClick={handleBackButtonOnClick}
+              >
+                {props.backButtonText}
+              </Button>
+            )}
+
             <Button fullWidth variant='contained' color='primary' type='submit'>
               {props.submitButtonText}
             </Button>
