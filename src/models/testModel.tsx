@@ -37,9 +37,20 @@ export const testModel = {
     label: "Hobby",
     error: "Bitte eine Hobby angeben!",
   },
+
+  company: {
+    name: "company",
+    label: "Unternehmen",
+    error: "Bitte ein Unternehmen angeben!",
+  },
+  bank: {
+    name: "bank",
+    label: "Bank",
+    error: "Bitte eine Bank angeben!",
+  },
 };
 
-const { email, password, city, hobby, gender } = testModel;
+const { email, password, city, hobby, gender, company, bank } = testModel;
 
 export const initialValues = {
   [email.name]: "",
@@ -47,17 +58,20 @@ export const initialValues = {
   [city.name]: "",
   [hobby.name]: "",
   [gender.name]: "",
+  [company.name]: "",
+  [bank.name]: "",
 };
 
 export const forms = [
   <FormBuilder
     title='Title'
+    primaryText='Some Primary Text and more.'
     config={[
       { name: email.name, label: email.label, type: "text" },
       { name: password.name, label: password.label, type: "password" },
       { name: city.name, label: city.label, type: "text" },
     ]}
-    submitButtonText='send'
+    submitButtonText='Next'
   />,
   <FormBuilder
     title='Next Title Diffrent Schema'
@@ -66,8 +80,18 @@ export const forms = [
       { name: hobby.name, label: hobby.label, type: "text" },
       { name: gender.name, label: gender.label, type: "text" },
     ]}
-    submitButtonText='send'
-    backButtonText='back'
+    submitButtonText='Next'
+    backButtonText='Back'
+  />,
+  <FormBuilder
+    title='Next Title Diffrent Page'
+    primaryText='Business Form'
+    config={[
+      { name: company.name, label: company.label, type: "text" },
+      { name: bank.name, label: bank.label, type: "text" },
+    ]}
+    submitButtonText='Next'
+    backButtonText='Back'
   />,
 ];
 // valSchema Array needs to correspond to the count of Forms which are passed to Forme
@@ -80,5 +104,9 @@ export const validationSchema = [
   yup.object({
     hobby: yup.string().required(hobby.error),
     gender: yup.string().required(gender.error),
+  }),
+  yup.object({
+    company: yup.string().required(company.error),
+    bank: yup.string().required(bank.error),
   }),
 ];

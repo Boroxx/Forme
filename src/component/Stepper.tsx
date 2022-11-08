@@ -1,4 +1,4 @@
-import { Box, Stack } from "@mui/system";
+import { Stack } from "@mui/system";
 import CircleIcon from "@mui/icons-material/Circle";
 import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
 
@@ -12,18 +12,25 @@ export const Stepper = (props: StepperProps) => {
 
   return (
     <Stack direction='row' spacing={2}>
-      {stepArray.map((step, index) => {
-        if (activeStep == step) {
+      {stepArray.map((step) => {
+        if (activeStep === step) {
           return (
-            <Box>
+            <>
               <CircleOutlinedIcon color='primary' />
-            </Box>
+            </>
           );
         } else {
+          if (step === 0) {
+            return (
+              <>
+                <CircleOutlinedIcon color='primary' />
+              </>
+            );
+          }
           return (
-            <Box>
+            <>
               <CircleIcon color='primary' />
-            </Box>
+            </>
           );
         }
       })}

@@ -59,12 +59,18 @@ export const FormBuilder = (props: FormBuilderProps) => {
   return (
     <Grid container sx={{ mt: 4 }}>
       {props.primaryText && (
-        <Grid item xs={12} md={6}>
-          <Box
-            sx={{
-              m: 5,
-            }}
-          >
+        <Grid
+          item
+          sx={{
+            m: 2,
+            display: "flex",
+            justifyContent: "flex-end",
+            alignItems: "center",
+          }}
+          xs={12}
+          md={6}
+        >
+          <Box>
             <Typography variant='h5'>{props.primaryText}</Typography>
           </Box>
         </Grid>

@@ -1,4 +1,3 @@
-import { Stack } from "@mui/material";
 import { Box } from "@mui/system";
 import { Formik } from "formik";
 import React, { useState } from "react";
@@ -38,7 +37,10 @@ export const Forme = (props: FormeProps) => {
     <FormeContext.Provider
       value={{ activeStep: activeStep, setActiveStep: setActiveStep }}
     >
-      <Stepper stepLength={stepLength} activeStep={activeStep} />
+      <Box sx={{ m: 2, display: "flex", justifyContent: "center" }}>
+        <Stepper stepLength={stepLength} activeStep={activeStep} />
+      </Box>
+
       <Formik
         initialValues={initialValues}
         validationSchema={getCurrentValSchema()}
