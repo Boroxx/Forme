@@ -1,4 +1,4 @@
-import { Button, Grid } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { Form } from "formik";
 import { useContext } from "react";
@@ -10,6 +10,7 @@ interface FormBuilderProps {
   title: string;
   submitButtonText: string;
   backButtonText?: string;
+  primaryText?: string;
 }
 
 interface FormBuilderField {
@@ -28,8 +29,9 @@ export const FormBuilder = (props: FormBuilderProps) => {
     return props.config.map((formBuilderField, index) => {
       if (formBuilderField.type === "text") {
         return (
-          <Grid item key={index}>
+          <Grid item xs={12} md={6} key={index}>
             <InputField
+              fullWidth
               name={formBuilderField.name}
               label={formBuilderField.label}
               type={formBuilderField.type}
@@ -38,8 +40,9 @@ export const FormBuilder = (props: FormBuilderProps) => {
         );
       } else if (formBuilderField.type === "password") {
         return (
-          <Grid item key={index}>
+          <Grid item xs={12} md={6} key={index}>
             <InputField
+              fullWidth
               name={formBuilderField.name}
               label={formBuilderField.label}
               type={formBuilderField.type}
@@ -54,37 +57,46 @@ export const FormBuilder = (props: FormBuilderProps) => {
     setActiveStep(activeStep - 1);
   };
   return (
-    <Box>
-      <Form>
-        <Grid
-          container
-          alignItems='center'
-          justifyContent='center'
-          direction='column'
-          spacing={2}
-        >
-          <Grid item>
-            <h1>{props.title}</h1>
-          </Grid>
-          {renderInputs()}
-          <Grid item>
-            {props.backButtonText && (
-              <Button
-                fullWidth
-                variant='contained'
-                color='primary'
-                onClick={handleBackButtonOnClick}
-              >
-                {props.backButtonText}
-              </Button>
-            )}
-
-            <Button fullWidth variant='contained' color='primary' type='submit'>
-              {props.submitButtonText}
-            </Button>
-          </Grid>
+    <Grid container sx={{ mt: 4 }}>
+      {props.primaryText && (
+        <Grid item xs={12} md={6}>
+          <Box
+            sx={{
+              m: 5,
+            }}
+          >
+            <Typography variant='h5'>{props.primaryText}</Typography>
+          </Box>
         </Grid>
-      </Form>
-    </Box>
+      )}
+
+      <Grid item>
+        <Form>
+          <Grid container direction='column' spacing={2}>
+            <Grid item>
+              <h3>{props.title}</h3>
+            </Grid>
+            {renderInputs()}
+            <Grid xs={12} md={6} item>
+              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                {props.backButtonText && (
+                  <Button
+                    variant='contained'
+                    color='primary'
+                    onClick={handleBackButtonOnClick}
+                  >
+                    {props.backButtonText}
+                  </Button>
+                )}
+
+                <Button variant='contained' color='primary' type='submit'>
+                  {props.submitButtonText}
+                </Button>
+              </Box>
+            </Grid>
+          </Grid>
+        </Form>
+      </Grid>
+    </Grid>
   );
 };

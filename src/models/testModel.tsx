@@ -61,6 +61,7 @@ export const forms = [
   />,
   <FormBuilder
     title='Next Title Diffrent Schema'
+    primaryText='Some Primary Text and explanation'
     config={[
       { name: hobby.name, label: hobby.label, type: "text" },
       { name: gender.name, label: gender.label, type: "text" },

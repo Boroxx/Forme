@@ -9,7 +9,6 @@ export const TestForm = (props: TestModel) => {
   return (
     <Form>
       <InputField name={email.name} />
-
       <Button variant='outlined' type='submit'>
         Send
       </Button>

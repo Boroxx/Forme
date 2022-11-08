@@ -1,8 +1,10 @@
+import { Stack } from "@mui/material";
 import { Box } from "@mui/system";
 import { Formik } from "formik";
 import React, { useState } from "react";
 
 import { initialValues, validationSchema } from "../models/testModel";
+import { Stepper } from "./Stepper";
 
 interface FormeProps {
   formDialogs: React.ReactElement[];
@@ -36,7 +38,7 @@ export const Forme = (props: FormeProps) => {
     <FormeContext.Provider
       value={{ activeStep: activeStep, setActiveStep: setActiveStep }}
     >
-      {activeStep}
+      <Stepper stepLength={stepLength} activeStep={activeStep} />
       <Formik
         initialValues={initialValues}
         validationSchema={getCurrentValSchema()}
@@ -44,9 +46,7 @@ export const Forme = (props: FormeProps) => {
           setActiveStep(activeStep + 1);
         }}
       >
-        {({ isSubmitting }) => (
-          <Box sx={{ p: 5 }}>{renderForms(activeStep)}</Box>
-        )}
+        {({ isSubmitting }) => <Box>{renderForms(activeStep)}</Box>}
       </Formik>
     </FormeContext.Provider>
   );
